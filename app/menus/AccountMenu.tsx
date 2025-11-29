@@ -1,21 +1,16 @@
 import { observer } from "mobx-react";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+import { ActionV2Separator } from "~/actions";
 import {
-  navigateToProfileSettings,
-  navigateToAccountPreferences,
-  openKeyboardShortcuts,
-  openChangelog,
-  openDocumentation,
-  openAPIDocumentation,
-  openBugReportUrl,
-  openFeedbackUrl,
   logout,
+  navigateToAccountPreferences,
+  navigateToProfileSettings,
+  openKeyboardShortcuts,
 } from "~/actions/definitions/navigation";
 import { changeTheme } from "~/actions/definitions/settings";
-import { ActionV2Separator } from "~/actions";
-import { useMenuAction } from "~/hooks/useMenuAction";
 import { DropdownMenu } from "~/components/Menu/DropdownMenu";
+import { useMenuAction } from "~/hooks/useMenuAction";
 
 type Props = {
   children?: React.ReactNode;
@@ -27,12 +22,7 @@ const AccountMenu: React.FC = ({ children }: Props) => {
   const actions = React.useMemo(
     () => [
       openKeyboardShortcuts,
-      openDocumentation,
-      openAPIDocumentation,
       ActionV2Separator,
-      openChangelog,
-      openFeedbackUrl,
-      openBugReportUrl,
       changeTheme,
       navigateToProfileSettings,
       navigateToAccountPreferences,
