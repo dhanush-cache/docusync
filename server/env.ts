@@ -1,31 +1,31 @@
 /* oxlint-disable no-console */
 // oxlint-disable-next-line import/order
-import environment from "./utils/environment";
-import os from "os";
-import wellKnownServices from "nodemailer/lib/well-known/services.json";
 import {
-  validate,
-  IsNotEmpty,
-  IsUrl,
-  IsOptional,
-  IsByteLength,
-  IsNumber,
-  IsIn,
-  IsEmail,
-  IsBoolean,
-} from "class-validator";
-import uniq from "lodash/uniq";
+  CannotUseWith,
+  CannotUseWithAny,
+  CannotUseWithout,
+  IsInCaseInsensitive,
+} from "@server/utils/validators";
 import { languages } from "@shared/i18n";
 import { Day, Hour } from "@shared/utils/time";
 import {
-  CannotUseWith,
-  CannotUseWithout,
-  CannotUseWithAny,
-  IsInCaseInsensitive,
-} from "@server/utils/validators";
+  IsBoolean,
+  IsByteLength,
+  IsEmail,
+  IsIn,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsUrl,
+  validate,
+} from "class-validator";
+import uniq from "lodash/uniq";
+import wellKnownServices from "nodemailer/lib/well-known/services.json";
+import os from "os";
 import Deprecated from "./models/decorators/Deprecated";
 import { getArg } from "./utils/args";
 import { Public, PublicEnvironmentRegister } from "./utils/decorators/Public";
+import environment from "./utils/environment";
 
 export class Environment {
   constructor() {
@@ -766,7 +766,7 @@ export class Environment {
    * The product name
    */
   @Public
-  public APP_NAME = "Outline";
+  public APP_NAME = "DocuSync";
 
   /**
    * Gravity constant for time decay in popularity scoring. Higher values cause

@@ -219,10 +219,10 @@ async function provisionFirstCollection(team: Team, user: User) {
     // For the first collection we go ahead and create some initial documents to get
     // the team started. You can edit these in /server/onboarding/x.md
     const onboardingDocs = [
-      "Integrations & API",
+      // "Integrations & API",
       "Our Editor",
       "Getting Started",
-      "What is Outline",
+      "What is DocuSync",
     ];
 
     for (const title of onboardingDocs) {
