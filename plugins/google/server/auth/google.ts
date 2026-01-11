@@ -4,13 +4,11 @@ import Router from "koa-router";
 import capitalize from "lodash/capitalize";
 import { Profile } from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth2";
+import slugify from "slugify";
 import { languages } from "@shared/i18n";
 import { slugifyDomain } from "@shared/utils/domains";
 import accountProvisioner from "@server/commands/accountProvisioner";
-import {
-  GmailAccountCreationError,
-  TeamDomainRequiredError,
-} from "@server/errors";
+
 import passportMiddleware from "@server/middlewares/passport";
 import { User } from "@server/models";
 import { AuthenticationResult } from "@server/types";
@@ -69,34 +67,16 @@ if (env.GOOGLE_CLIENT_ID && env.GOOGLE_CLIENT_SECRET) {
           const team = await getTeamFromContext(context);
           const client = getClientFromContext(context);
 
-          // No profile domain means personal gmail account
-          // No team implies the request came from the apex domain
-          // This combination is always an error
-          if (!domain && !team) {
-            const userExists = await User.count({
-              where: { email: profile.email.toLowerCase() },
-              include: [
-                {
-                  association: "team",
-                  required: true,
-                },
-              ],
-            });
-
-            // Users cannot create a team with personal gmail accounts
-            if (!userExists) {
-              throw GmailAccountCreationError();
-            }
-
-            // To log-in with a personal account, users must specify a team subdomain
-            throw TeamDomainRequiredError();
-          }
-
           // remove the TLD and form a subdomain from the remaining
           // subdomains of the form "foo.bar.com" are allowed as primary Google Workspaces domains
           // see https://support.google.com/nonprofits/thread/19685140/using-a-subdomain-as-a-primary-domain
-          const subdomain = domain ? slugifyDomain(domain) : "";
-          const teamName = capitalize(subdomain);
+          const subdomain = domain
+            ? slugifyDomain(domain)
+            : slugify(profile.email.split("@")[0], { lower: true });
+
+          const teamName = domain
+            ? capitalize(subdomain)
+            : profile.displayName || profile.email.split("@")[0];
 
           // Request a larger size profile picture than the default by tweaking
           // the query parameter.
