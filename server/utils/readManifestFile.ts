@@ -11,7 +11,7 @@ export type Chunk = {
 
 export type ManifestStructure = Record<string, Chunk>;
 
-export const readManifestFile = (file = "./build/app/.vite/manifest.json") => {
+export const readManifestFile = (file = "./dist/.vite/manifest.json") => {
   const absoluteFilePath = path.resolve(file);
 
   let manifest = "{}";

@@ -2,6 +2,6 @@
 module.exports = {
   includeCommitMessage: true,
   webpack: {
-    stats: "./build/app/webpack-stats.json",
+    stats: "./dist/webpack-stats.json",
   },
 };

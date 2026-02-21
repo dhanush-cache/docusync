@@ -137,7 +137,7 @@ export default () =>
       },
     },
     build: {
-      outDir: "./build/app",
+      outDir: "./dist",
       manifest: true,
       sourcemap: process.env.CI ? false : "hidden",
       minify: "oxc",
