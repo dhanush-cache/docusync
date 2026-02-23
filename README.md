@@ -13,6 +13,8 @@
   <a href="https://github.com/styled-components/styled-components"><img src="https://img.shields.io/badge/style-%F0%9F%92%85%20styled--components-orange.svg" alt="Styled Components"></a>
   <a href="#" alt="Localized"><img src="https://badges.crowdin.net/outline/localized.svg"></a>
 </p>
+## Click here to try it out
+https://docusync-2.onrender.com/
 
 This repository contains the complete source code for **Docusync**, a collaborative documentation and knowledge-sharing platform. If you simply want to use the product.
 
